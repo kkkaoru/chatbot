@@ -1,0 +1,14 @@
+{
+  "name": "chatbot",
+  "type": "module",
+  "private": true,
+  "workspaces":["packages/*","workspaces/*"],
+  "devDependencies": {
+    "@types/bun": "1.2.20",
+    "typescript": "5.9.2",
+    "wrangler": "4.30.0"
+  },
+  "dependencies": {
+    "hono": "4.9.1"
+  }
+}
