@@ -1,16 +1,35 @@
+# Lefthook configuration
+# https://github.com/evilmartians/lefthook
+
 pre-commit:
+  skip:
+    - run: test "${CI}" = "true"  # Skip in CI environment
   parallel: true
   commands:
     biome:
-      glob: "*.{js,ts,jsx,tsx,json,jsonc,mjs,cjs}"
-      run: bun biome check --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
-    actionlint:
-      glob: ".github/workflows/*.{yml,yaml}"
-      run: actionlint {staged_files}
-    yamllint:
-      glob: "*.{yml,yaml}"
-      run: yamllint {staged_files}
+      run: bun run biome:check
+      stage_fixed: true
+
+    typecheck:
+      glob: "**/*.{ts,tsx}"
+      run: bun run typecheck
+    # Alternative: Use tsgo for faster type checking
+    tsgo:
+      glob: "**/*.{ts,tsx}"
+      run: tsgo
+      skip:
+        - run: "! command -v tsgo >/dev/null 2>&1"  # Skip if tsgo not available
+
 commit-msg:
+  skip:
+    - run: test "${CI}" = "true"  # Skip in CI environment
   commands:
     commitlint:
       run: bunx commitlint --edit {1}
+
+pre-push:
+  skip:
+    - run: test "${CI}" = "true"  # Skip in CI environment
+  commands:
+    test:
+      run: bun run test:coverage
