@@ -74,6 +74,9 @@ web_modules/
 .cache
 .parcel-cache
 
+# Turborepo
+.turbo
+
 # Next.js build output
 .next
 out
@@ -137,3 +140,5 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+.claude/settings.local.json
