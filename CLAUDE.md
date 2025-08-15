@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## File Operation Rules
+- **IMPORTANT**: When reading or writing files in this project, always use serena MCP tools instead of the default file system tools
+- Use `mcp__serena__read_file` for reading files
+- Use `mcp__serena__create_text_file` for creating new files
+- Use `mcp__serena__replace_regex` or `mcp__serena__replace_symbol_body` for editing files
+- This ensures proper integration with the project's language server and memory system
+
 ## Project Overview
 
 This is a chatbot project using Hono framework with Discord integration, configured as a Bun monorepo with workspace support.
@@ -67,16 +74,11 @@ bun test:watch
 ## Development Guidelines
 
 ### Unit Testing
-Please refer to the [Unit Test Rules](.rules/unit-test.md) for detailed testing guidelines, including:
+Please refer to the Unit Test Rules for detailed testing guidelines: @.rules/unit-test.md
+
+Guidelines include:
 - Test structure and naming conventions
 - Mocking strategies (especially for global objects like Bun)
 - Type safety requirements
 - Coverage targets (minimum 80%)
 - Biome configuration for test files
-
-### File Operation Rules
-- **IMPORTANT**: When reading or writing files in this project, always use serena MCP tools instead of the default file system tools
-- Use `mcp__serena__read_file` for reading files
-- Use `mcp__serena__create_text_file` for creating new files
-- Use `mcp__serena__replace_regex` or `mcp__serena__replace_symbol_body` for editing files
-- This ensures proper integration with the project's language server and memory system
