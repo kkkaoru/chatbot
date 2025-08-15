@@ -1,0 +1,43 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "bunx",
+      "args": ["@upstash/context7-mcp"]
+    },
+    "brave-search": {
+      "command": "bunx",
+      "args": [
+        "-y",
+        "@brave/brave-search-mcp-server",
+        "--transport",
+        "stdio"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}",
+        "BRAVE_MCP_TRANSPORT": "stdio"
+      }
+    },
+    "serena": {
+        "command": "uv",
+        "args": ["run", "--directory", "${SERENA_PATH}", "serena", "start-mcp-server"],
+        "env": {
+            "SERENA_PATH": "${SERENA_PATH}"
+        }
+    },
+    "deepl": {
+      "command": "bunx",
+      "args": ["deepl-mcp-server"],
+      "env": {
+        "DEEPL_API_KEY": "${DEEPL_API_KEY}"
+      }
+    },
+    "memory": {
+      "command": "bunx",
+      "args": ["@modelcontextprotocol/server-memory"]
+    },
+    "filesystem": {
+      "command": "bunx",
+      "args": ["@modelcontextprotocol/server-filesystem"]
+    }
+  }
+}
