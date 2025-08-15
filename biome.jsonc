@@ -17,6 +17,39 @@
     "lineEnding": "lf",
     "lineWidth": 80
   },
+  // テストファイルに対する設定のオーバーライド
+  "overrides": [
+    {
+      "includes": ["**/*.test.ts"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            // テストファイルでは、関数名やテスト説明文（例: 'buttonHandler', 'selectHandler'）が
+            // 高エントロピー文字列として誤検知されることがあるため、noSecretsルールを無効化
+            // これらは実際にはシークレット情報ではなく、単なる関数名やハンドラー名
+            "noSecrets": "off",
+            // テストファイルでは、モックされた関数がPromiseを返すがawaitする必要がないため無効化
+            "noFloatingPromises": "off"
+          },
+          "performance": {
+            // テストファイルでは、モックオブジェクトのプロパティ削除などでdeleteを使用することがあるため許可
+            "noDelete": "off"
+          },
+          "style": {
+            // Vitestで'it'の代わりに'test'を使用することを強制
+            "noRestrictedGlobals": {
+              "level": "error",
+              "options": {
+                "deniedGlobals": {
+                  "it": "Use 'test' instead of 'it' for consistency"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
   "linter": {
     "enabled": true,
     "rules": {
@@ -106,6 +139,8 @@
         "noNegationElse": "error",
         "noNestedTernary": "error",
         "noNonNullAssertion": "error",
+        // Note: Type assertions (as) are prevented by proper TypeScript configuration
+        // and type guards instead of using 'as' casts
         "noParameterAssign": "error",
         "noRestrictedGlobals": "off",
         "noShoutyConstants": "error",
@@ -204,7 +239,14 @@
         "noCompareNegZero": "error",
         "noConfusingLabels": "error",
         "noConfusingVoidType": "error",
-        "noConsole": "error",
+        // console.error は環境変数の検証エラーなど、正当なエラーログ出力に必要なため、
+        // console.log のデバッグ使用のみを制限
+        "noConsole": {
+          "level": "error",
+          "options": {
+            "allow": ["error", "warn", "info"]
+          }
+        },
         "noConstEnum": "error",
         "noControlCharactersInRegex": "error",
         "noDebugger": "error",
@@ -279,7 +321,7 @@
         "noUselessUndefined": "error",
         "useConsistentTypeDefinitions": "error",
         "useExhaustiveSwitchCases": "error",
-        "useExplicitType": "off"
+        "useExplicitType": "error"
       },
       "performance": {
         "noAccumulatingSpread": "error",
