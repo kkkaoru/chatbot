@@ -1,1 +1,1 @@
-export default import('@commitlint/cz-commitlint');
+export default import('@commitlint/cz-commitlint')
