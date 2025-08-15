@@ -1,0 +1,27 @@
+name: CI# Strict workflow configuration with security best practices
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+# Cancel in-progress runs when a new commit is pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+# Set default permissions to read-only for security
+permissions:
+  contents: read
+
+jobs:
+  biome:
+    name: Biome Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Run Biome check
+        run: bun biome check
