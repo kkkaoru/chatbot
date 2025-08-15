@@ -2,13 +2,29 @@
   "name": "chatbot",
   "type": "module",
   "private": true,
+  "packageManager": "bun@1.2.20",
   "workspaces": [
+    "apps/*",
     "packages/*",
     "workspaces/*"
   ],
   "scripts": {
+    "dev": "turbo run dev",
+    "start": "turbo run start",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "biome:check": "turbo run biome:check",
+    "biome:check-write": "turbo run biome:check-write",
+    "format": "turbo run format",
+    "lint": "turbo run lint",
+    "check": "lefthook run check",
+    "fix": "lefthook run fix",
+    "test": "turbo run test",
+    "test:run": "turbo run test:run",
+    "test:coverage": "turbo run test:coverage",
     "commit": "cz",
-    "lefthook:install": "lefthook install"
+    "lefthook:install": "lefthook install",
+    "lefthook:run": "lefthook run"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
@@ -18,10 +34,14 @@
     "@types/bun": "1.2.20",
     "@types/node": "24.2.1",
     "@typescript/native-preview": "7.0.0-dev.20250814.1",
+    "@vitest/coverage-v8": "3.2.4",
+    "@vitest/ui": "3.2.4",
     "commitizen": "4.3.1",
     "discord-api-types": "0.38.20",
     "lefthook": "1.12.3",
+    "turbo": "2.5.5",
     "typescript": "5.9.2",
+    "vitest": "3.2.4",
     "wrangler": "4.30.0"
   },
   "dependencies": {
