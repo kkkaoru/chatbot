@@ -1,4 +1,6 @@
-name: CI# Strict workflow configuration with security best practices
+name: CI
+
+# Strict workflow configuration with security best practices
 on:
   push:
   pull_request:
@@ -13,15 +15,29 @@ concurrency:
 permissions:
   contents: read
 
+# Default job configuration
+defaults:
+  run:
+    shell: bash
+
 jobs:
-  biome:
-    name: Biome Check
+  ci:
+    name: CI Checks
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       contents: read
+    strategy:
+      matrix:
+        task:
+          - name: "Biome Check"
+            command: "bun run biome:check"
+          - name: "Type Check"
+            command: "bun run typecheck"
+          - name: "Test Coverage"
+            command: "bun run test:coverage"
     steps:
       - name: Setup
         uses: ./.github/actions/setup
-      - name: Run Biome check
-        run: bun biome check
+      - name: Run ${{ matrix.task.name }}
+        run: ${{ matrix.task.command }}
