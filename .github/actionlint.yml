@@ -1,0 +1,62 @@
+# actionlint configuration
+# https://github.com/rhysd/actionlint/blob/main/docs/config.md
+#
+# Strict configuration for GitHub Actions workflows
+# This configuration enforces best practices and security guidelines
+
+# Self-hosted runner labels configuration
+# Only define labels that are actually used in your workflows
+self-hosted-runner:
+  labels: []
+  # Explicitly define self-hosted runner labels to prevent typos
+  # Example:
+  # - self-hosted
+  # - linux-x64
+  # - gpu-enabled
+
+# Configuration variables used in workflows
+# Strictly define all variables to prevent typos and ensure consistency
+config-variables:
+  # List all vars.* variables used in workflows
+  # This prevents typos and ensures all variables are documented
+  # Example:
+  # - NODE_VERSION
+  # - DEPLOY_ENVIRONMENT
+  # - API_ENDPOINT
+
+# Path-specific configurations
+paths:
+  # Apply strict rules to all workflow files
+  .github/workflows/**/*.{yml,yaml}:
+    # Only ignore errors that are absolutely necessary
+    # Each ignore rule should be documented with a reason
+    ignore: []
+    # Uncomment only if absolutely necessary and document why:
+    # ignore:
+    #   # Example: Ignore SC2086 only for specific legacy scripts
+    #   - 'shellcheck reported issue in this script: SC2086:.+'
+
+  # Stricter rules for production workflows
+  .github/workflows/ci.yml:
+    ignore: []
+
+  .github/workflows/cd.yml:
+    ignore: []
+
+  .github/workflows/release.yml:
+    ignore: []
+
+# Additional strict rules (conceptual - actionlint doesn't support these directly)
+# but documenting expected practices:
+#
+# Required practices:
+# 1. Always pin action versions to full commit SHA for security
+# 2. Use environment protection rules for production deployments
+# 3. Limit permissions explicitly in each job
+# 4. Use OIDC for cloud provider authentication instead of long-lived secrets
+# 5. Enable dependency review and security scanning
+# 6. Use reusable workflows for common patterns
+# 7. Set timeout-minutes on all jobs to prevent hanging
+# 8. Use concurrency groups to prevent duplicate runs
+# 9. Always validate inputs in reusable workflows
+# 10. Use GitHub's built-in GITHUB_TOKEN when possible instead of PATs
