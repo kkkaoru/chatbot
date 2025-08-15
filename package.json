@@ -2,13 +2,25 @@
   "name": "chatbot",
   "type": "module",
   "private": true,
-  "workspaces":["packages/*","workspaces/*"],
+  "workspaces": ["packages/*", "workspaces/*"],
+  "scripts": {
+    "commit": "cz",
+    "lefthook:install": "lefthook install"
+  },
   "devDependencies": {
+    "@biomejs/biome": "2.2.0",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "@commitlint/cz-commitlint": "19.8.1",
     "@types/bun": "1.2.20",
+    "@typescript/native-preview": "7.0.0-dev.20250814.1",
+    "commitizen": "4.3.1",
+    "lefthook": "1.12.3",
     "typescript": "5.9.2",
     "wrangler": "4.30.0"
   },
   "dependencies": {
+    "discord-hono": "0.19.4",
     "hono": "4.9.1"
   }
 }
