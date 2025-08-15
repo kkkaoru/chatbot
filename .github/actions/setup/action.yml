@@ -1,0 +1,14 @@
+name: Setup
+description: Common setup steps for CI workflows
+runs:
+  using: composite
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+    - name: Install dependencies
+      shell: bash
+      run: bun install --frozen-lockfile
