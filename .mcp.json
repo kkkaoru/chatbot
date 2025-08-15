@@ -6,23 +6,24 @@
     },
     "brave-search": {
       "command": "bunx",
-      "args": [
-        "-y",
-        "@brave/brave-search-mcp-server",
-        "--transport",
-        "stdio"
-      ],
+      "args": ["-y", "@brave/brave-search-mcp-server", "--transport", "stdio"],
       "env": {
         "BRAVE_API_KEY": "${BRAVE_API_KEY}",
         "BRAVE_MCP_TRANSPORT": "stdio"
       }
     },
     "serena": {
-        "command": "uv",
-        "args": ["run", "--directory", "${SERENA_PATH}", "serena", "start-mcp-server"],
-        "env": {
-            "SERENA_PATH": "${SERENA_PATH}"
-        }
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${SERENA_PATH}",
+        "serena",
+        "start-mcp-server"
+      ],
+      "env": {
+        "SERENA_PATH": "${SERENA_PATH}"
+      }
     },
     "deepl": {
       "command": "bunx",
