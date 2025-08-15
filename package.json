@@ -19,6 +19,7 @@
     "@types/node": "24.2.1",
     "@typescript/native-preview": "7.0.0-dev.20250814.1",
     "commitizen": "4.3.1",
+    "discord-api-types": "0.38.20",
     "lefthook": "1.12.3",
     "typescript": "5.9.2",
     "wrangler": "4.30.0"
