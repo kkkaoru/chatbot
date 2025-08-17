@@ -45,6 +45,7 @@
     "wrangler": "4.30.0"
   },
   "dependencies": {
+    "@launchdarkly/cloudflare-server-sdk": "2.7.9",
     "discord-hono": "0.19.4",
     "hono": "4.9.1"
   }
